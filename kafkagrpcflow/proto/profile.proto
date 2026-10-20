@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package profile;
+
+// Owned by profile-service (port 50052). Called by: gateway, interaction-service.
+service ProfileService {
+  rpc GetProfile (GetProfileRequest) returns (Profile);
+  rpc UpdateProfile (UpdateProfileRequest) returns (Profile);
+  rpc ListProfiles (ListProfilesRequest) returns (ListProfilesResponse);
+}
+
+message GetProfileRequest {
+  string user_id = 1;
+}
+
+message UpdateProfileRequest {
+  string user_id = 1;
+  string bio = 2;
+}
+
+message ListProfilesRequest {}
+
+message ListProfilesResponse {
+  repeated Profile profiles = 1;
+}
+
+message Profile {
+  string user_id = 1;
+  string name = 2;
+  string email = 3;
+  string bio = 4;
+  int32 followers_count = 5;
+  int32 following_count = 6;
+}

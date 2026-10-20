@@ -1,0 +1,17 @@
+{
+  "name": "kafkagrpcflow",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "gateway",
+    "services/*"
+  ],
+  "scripts": {
+    "infra:up": "docker compose up -d --wait",
+    "infra:down": "docker compose down -v",
+    "dev": "concurrently -k -n auth,profile,interaction,gateway,web -c blue,green,magenta,yellow,cyan \"npm run start -w services/auth\" \"npm run start -w services/profile\" \"npm run start -w services/interaction\" \"npm run start -w gateway\" \"npm run dev -w frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

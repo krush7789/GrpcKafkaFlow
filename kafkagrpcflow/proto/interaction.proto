@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package interaction;
+
+// Owned by interaction-service (port 50053). Called by: gateway.
+service InteractionService {
+  rpc Follow (FollowRequest) returns (FollowResponse);
+  rpc GetFollowing (GetFollowingRequest) returns (GetFollowingResponse);
+}
+
+message FollowRequest {
+  string follower_id = 1;
+  string followee_id = 2;
+}
+
+message FollowResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetFollowingRequest {
+  string user_id = 1;
+}
+
+message GetFollowingResponse {
+  repeated string followee_ids = 1;
+}
